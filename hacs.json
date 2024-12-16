@@ -1,0 +1,10 @@
+{
+    "name": "Ivano-Frankivsk Power Off",
+    "repository": "https://github.com/dan22m/ha-if-poweroff",
+    "domain": "if_poweroff",
+    "documentation": "https://github.com/dan22m/ha-if-poweroff",
+    "issue_tracker": "https://github.com/dan22m/ha-if-poweroff/issues",
+    "dependencies": [],
+    "codeowners": ["@dan22m"]
+  }
+  

@@ -4,7 +4,6 @@ from datetime import timedelta
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
-from homeassistant.const import CONF_NAME, CONF_UNIT_OF_MEASUREMENT
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -24,14 +23,13 @@ def get_power_off_data():
 class PowerOffCoordinator(DataUpdateCoordinator):
     """Координатор для отримання даних про вимкнення електроенергії."""
 
-    def __init__(self, hass, name, update_interval):
+    def __init__(self, hass, update_interval):
         """Ініціалізація координатора."""
-        self._name = name
         self._update_interval = update_interval
         super().__init__(
             hass,
             _LOGGER,
-            name=name,
+            name="Power Off Coordinator",
             update_interval=timedelta(minutes=update_interval),
         )
 
@@ -46,29 +44,23 @@ class PowerOffCoordinator(DataUpdateCoordinator):
 class PowerOffSensor(SensorEntity):
     """Інтеграція для створення сенсора Power Off."""
 
-    def __init__(self, coordinator, name):
+    def __init__(self, coordinator):
         """Ініціалізація сенсора."""
         self._coordinator = coordinator
-        self._name = name
         self._state = None
 
     @property
     def name(self):
         """Ім'я сенсора."""
-        return self._name
+        return "Ivano-Frankivsk Power Off Sensor"
 
     @property
     def state(self):
-        """Статус сенсора (можна тут вказати вимкнення чи включення)."""
+        """Статус сенсора."""
         return self._state
-
-    @property
-    def extra_state_attributes(self):
-        """Додаткові атрибути для сенсора."""
-        return {"status": self._state}
 
     async def async_update(self):
         """Оновлюємо дані сенсора."""
         data = await self._coordinator.async_refresh()
-        # Тут ви можете вибрати, який саме параметр з API хочете відображати
-        self._state = data.get('today', {}).get('status', 'No data')  # Наприклад, статус "вимкнено"
+        # Отримуємо статус вимкнення електрики для поточної години
+        self._state = data.get("today", {}).get("status", "No data")

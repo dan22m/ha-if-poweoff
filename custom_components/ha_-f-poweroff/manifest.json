@@ -1,8 +1,9 @@
 {
-    "domain": "if_poweroff",
+    "domain": "ha_if_poweroff",
     "name": "Ivano-Frankivsk Power Off",
-    "documentation": "https://github.com/dan22m/ha-if_poweroff",
+    "documentation": "https://github.com/dan22m/ha_if_poweroff",
     "requirements": ["requests", "beautifulsoup4"],
+    "dependencies": [],
     "codeowners": ["@dan22m"],
     "iot_class": "cloud_polling",
     "version": "1.0.0"
