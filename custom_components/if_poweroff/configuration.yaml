@@ -1,0 +1,3 @@
+if_poweroff:
+  name: "Ivano-Frankivsk Power Off"
+  unit_of_measurement: "Status"
